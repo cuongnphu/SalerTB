@@ -11,14 +11,16 @@
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../webjars/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../../js/order.js"></script>
+    <script src="../../js/bill.js"></script>
 </head>
 <body>
 <h3> Đơn Hàng :</h3>
 <div class="table-responsive">
-    <div>
-        <label>Tên : </label> ${tabOrder.orderBill.name}
-    </div>
-    <div class="container-fluid">
+    <div id="printDiv" class="container-fluid">
+        <div>
+            <label>Tên : </label> ${tabOrder.orderBill.name}
+        </div>
         <table class="table table-bordered" style="width: 600px">
             <thead>
             <tr>
@@ -46,9 +48,18 @@
             </c:if>
         </table>
     </div>
-    <div>
-        <input class="btn btn-info" type="submit" value="In Bill"
-               onclick="window.print()"/>
+    <div align="right" style="width: 600px">
+        <div class="col-sm-4 p-0">
+            <a class="btn-info btn"
+               href="/orderdetail/${tabOrder.orderBill.id}">&#10094 Trờ Lại</a>
+        </div>
+        <div class="col-sm-4 p-0">
+            <a class="btn btn-info" onclick="orderScript.printDiv()">&#128229 In Bill</a>
+        </div>
+        <div class="col-sm-4 p-0">
+            <input class="btn btn-info" type="submit" value="&#127968 Trang Chủ"
+                   onclick="window.location.replace('/start')"/>
+        </div>
     </div>
 </div>
 </body>

@@ -59,4 +59,9 @@ public class OrderBillServiceImpl implements OrderBillService {
     public List<OrderBill> getAllOrderBills() {
         return this.orderBillDAO.getAllOrderBills();
     }
+
+    @Override
+    public List<OrderBill> getLast5OrderBills() {
+        return this.orderBillDAO.getLast5OrderBills();
+    }
 }

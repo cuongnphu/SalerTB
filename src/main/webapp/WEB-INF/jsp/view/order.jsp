@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -35,5 +36,37 @@
         </table>
     </div>
 </form:form>
+<br>
+<h4 style="color: red"> Danh Sách :</h4>
+<div class="table-responsive">
+    <div class="container-fluid">
+        <table class="table table-bordered" style="width: 600px">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Ngày (Date)</th>
+                <th>Tên Khách</th>
+                <th>Tổng Tiền $(K)</th>
+                <th>#</th>
+            </tr>
+            </thead>
+            <tbody id="myBill">
+            <c:if test="${listOrderBill.size() > 0}">
+            <c:forEach items="${listOrderBill}" var="order" varStatus="status">
+                <tr class="tb-row">
+                    <td>${status.index}</td>
+                    <td><fmt:formatDate value="${order.date}" pattern="dd/MM/yyyy"/></td>
+                    <td>${order.name}</td>
+                    <td>${order.total}</td>
+                    <td><a class="btn-info btn-sm" href="/orderdetail/${order.id}">&#9998</a></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+            </c:if>
+        </table>
+    </div>
+</div>
+
+
 </body>
 </html>

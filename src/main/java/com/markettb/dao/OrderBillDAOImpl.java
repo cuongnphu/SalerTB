@@ -58,4 +58,9 @@ public class OrderBillDAOImpl implements OrderBillDAO {
     public List<OrderBill> getAllOrderBills() {
         return orderBillRepository.findAll();
     }
+
+    @Override
+    public List<OrderBill> getLast5OrderBills() {
+        return orderBillRepository.findFirst5ByOrderByIdDesc();
+    }
 }

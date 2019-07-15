@@ -11,4 +11,5 @@ public interface OrderBillDAO {
     public void deleteOrderBill(int id);
     public OrderBill getOrderBillById(int id);
     public List<OrderBill> getAllOrderBills();
+    public List<OrderBill> getLast5OrderBills();
 }

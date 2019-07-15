@@ -1,7 +1,7 @@
 var bill_count = 0;
 var index = 0;
 
-function addBill(orderId,intIndex) {
+function addBill(orderId, intIndex) {
     index = intIndex + bill_count;
     var tbody = document.getElementById("myBill");
     var tr = document.createElement("tr");
@@ -14,33 +14,33 @@ function addBill(orderId,intIndex) {
 
     // Initialize variable Id
     var inputid = document.createElement("input");
-    inputid.id = "billList"+index+".id";
+    inputid.id = "billList" + index + ".id";
     inputid.type = "text";
-    inputid.name = "billList["+index+"].id";
+    inputid.name = "billList[" + index + "].id";
     inputid.readOnly = "true";
     inputid.hidden = "true";
-    inputid.setAttribute('value',"0");
+    inputid.setAttribute('value', "0");
 
     // Initialize variable orderId
     var inputorderid = document.createElement("input");
-    inputorderid.id = "billList"+index+".orderId";
+    inputorderid.id = "billList" + index + ".orderId";
     inputorderid.type = "text";
-    inputorderid.name = "billList["+index+"].orderId";
+    inputorderid.name = "billList[" + index + "].orderId";
     inputorderid.readOnly = "true";
     inputorderid.hidden = "true";
-    inputorderid.setAttribute('value',orderId.toString());
+    inputorderid.setAttribute('value', orderId.toString());
 
     // Initialize variable price
     var inputPrice = document.createElement("input");
-    inputPrice.id = "billList"+index+".price";
+    inputPrice.id = "billList" + index + ".price";
     inputPrice.type = "text";
-    inputPrice.name = "billList["+index+"].price";
+    inputPrice.name = "billList[" + index + "].price";
 
     // Initialize variable Quantity
     var inputQuantity = document.createElement("input");
-    inputQuantity.id = "billList"+index+".quantity";
+    inputQuantity.id = "billList" + index + ".quantity";
     inputQuantity.type = "text";
-    inputQuantity.name = "billList["+index+"].quantity";
+    inputQuantity.name = "billList[" + index + "].quantity";
 
     // Initialize variable index
     var labelIndex = document.createElement("a");
@@ -69,26 +69,37 @@ function addBill(orderId,intIndex) {
 
 var billScript = {
     editOrderValidateForm: function () {
-        var priceBill = $("#myBill > div.row > div > input[id*=price]");
-        var quantityBill = $("#myBill > div.row > div > input[id*=quantity]");
-        if(typeof priceBill.val() === "undefined")
-            return true;
-        else{
-            for(var i=0;i<priceBill.size();i++){
-                if(isNaN(priceBill.get(i).value) || priceBill.get(i).value <= 0 ||  priceBill.get(i).value == "" ) {
-                    priceBill.get(i).style.borderColor = "red";
-                    return false;
-                }else
-                    priceBill.get(i).style.borderColor = "";
+        var priceBill = $("#myBill > tr.tb-row > td > input[id*=price]");
+        var quantityBill = $("#myBill > tr.tb-row > td > input[id*=quantity]");
 
-                if(isNaN(quantityBill.get(i).value) || quantityBill.get(i).value <= 0 ||  quantityBill.get(i).value == "" ) {
-                    quantityBill.get(i).style.borderColor = "red";
-                    return false;
-                }else
-                    quantityBill.get(i).style.borderColor = "";
-            }
+        /*Case: Click button Hoàn Thành without input data in index 1*/
+        if (isNaN(quantityBill.get(0).value) || quantityBill.get(0).value <= 0 || quantityBill.get(0).value == "") {
+            quantityBill.get(0).style.borderColor = "red";
+            return false;
+        } else
+            quantityBill.get(0).style.borderColor = "";
 
+        if (isNaN(priceBill.get(0).value) || priceBill.get(0).value <= 0 || priceBill.get(0).value == "") {
+            priceBill.get(0).style.borderColor = "red";
+            return false;
+        } else
+            priceBill.get(0).style.borderColor = "";
+
+        /*Case: Check default when not input data*/
+        for (var i = 0; i < priceBill.length; i++) {
+            if (isNaN(quantityBill.get(i).value) || quantityBill.get(i).value < 0 || quantityBill.get(i).value == "") {
+                quantityBill.get(i).style.borderColor = "red";
+                return false;
+            } else
+                quantityBill.get(i).style.borderColor = "";
+
+            if (isNaN(priceBill.get(i).value) || priceBill.get(i).value < 0 || priceBill.get(i).value == "") {
+                priceBill.get(i).style.borderColor = "red";
+                return false;
+            } else
+                priceBill.get(i).style.borderColor = "";
         }
+
     }
 
 };

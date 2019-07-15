@@ -1,0 +1,19 @@
+CREATE TABLE `orderbill` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `total` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `bill` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` int(11) unsigned NOT NULL,
+  `price` int(11) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `total` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `bill_fk` (`order_id`),
+  CONSTRAINT `bill_fk` FOREIGN KEY (`order_id`) REFERENCES `orderbill` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8

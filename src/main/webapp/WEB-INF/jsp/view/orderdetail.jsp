@@ -39,41 +39,50 @@
                 </tr>
                 </thead>
                 <tbody id="myBill">
-                <c:if test="${tabOrder.billList.size() > 0}">
-                    <c:forEach items="${tabOrder.billList}" var="bill" varStatus="status">
-                        <tr class="tb-row">
-                            <td>
-                                <form:input type="text" path="billList[${status.index}].id" readonly="true"
-                                            hidden="true"/>
-                                <form:input type="text" path="billList[${status.index}].orderId"
-                                            readonly="true"
-                                            hidden="true"/>
-                                    ${status.index}
-                            </td>
-                            <td>
-                                <form:input type="text" path="billList[${status.index}].quantity"/>
-                            </td>
-                            <td>
-                                <form:input type="text" path="billList[${status.index}].price"/>
-                            </td>
-                            <td>
+                <c:forEach items="${tabOrder.billList}" var="bill" varStatus="status">
+                    <tr class="tb-row">
+                        <td>
+                            <form:input type="text" path="billList[${status.index}].id" readonly="true"
+                                        hidden="true"/>
+                            <form:input type="text" path="billList[${status.index}].orderId"
+                                        readonly="true"
+                                        hidden="true"/>
+                                ${status.index}
+                        </td>
+                        <td>
+                            <form:input type="text" path="billList[${status.index}].quantity"
+                                        onfocus="if(this.value == '0'){this.value ='';}"/>
+                        </td>
+                        <td>
+                            <form:input type="text" path="billList[${status.index}].price"
+                                        onfocus="if(this.value == '0'){this.value ='';}"/>
+                        </td>
+                        <td>
+                            <c:if test="${bill.id > 0}">
                                 <a class="btn-danger btn-xs"
                                    href="bill/${bill.orderId}/delete/${bill.id}">-</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody></c:if>
+                            </c:if>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
         </div>
-        <div align="right"style="width: 600px">
+        <div align="right" style="width: 600px">
             <a class="btn-success btn-sm"
                onclick="addBill(${tabOrder.orderBill.id},${tabOrder.billList.size()})">&#10133</a>
         </div>
         <br>
-        <div>
-            <input class="btn btn-info" type="submit" value="Hoàn Thành"
-                   onchange="return billScript.editOrderValidateForm()"
-                   onclick="return billScript.editOrderValidateForm()"/>
+        <div align="right" style="width: 600px">
+                <div class="col-sm-8 p-0">
+                    <a class="btn-info btn"
+                       href="/deleteorder/${tabOrder.orderBill.id}">&#10094 Thoát</a>
+                </div>
+                <div class="col-sm-4 p-0">
+                    <input class="btn btn-info" type="submit" value="Hoàn Thành"
+                           onchange="return billScript.editOrderValidateForm()"
+                           onclick="return billScript.editOrderValidateForm()"/>
+                </div>
         </div>
     </div>
 </form:form>
