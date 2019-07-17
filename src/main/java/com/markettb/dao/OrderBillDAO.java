@@ -2,6 +2,7 @@ package com.markettb.dao;
 
 import com.markettb.model.OrderBill;
 
+import java.util.Date;
 import java.util.List;
 
 public interface OrderBillDAO {
@@ -12,4 +13,5 @@ public interface OrderBillDAO {
     public OrderBill getOrderBillById(int id);
     public List<OrderBill> getAllOrderBills();
     public List<OrderBill> getLast5OrderBills();
+    public List<OrderBill> getAllOrderBillByDateBetween(Date fromDate, Date toDate);
 }

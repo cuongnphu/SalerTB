@@ -4,6 +4,8 @@ import com.markettb.model.OrderBill;
 import com.markettb.repository.OrderBillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Date;
 import java.util.List;
 
 
@@ -62,5 +64,10 @@ public class OrderBillDAOImpl implements OrderBillDAO {
     @Override
     public List<OrderBill> getLast5OrderBills() {
         return orderBillRepository.findFirst5ByOrderByIdDesc();
+    }
+
+    @Override
+    public List<OrderBill> getAllOrderBillByDateBetween(Date fromDate, Date toDate) {
+        return orderBillRepository.findAllByDateBetween(fromDate,toDate);
     }
 }

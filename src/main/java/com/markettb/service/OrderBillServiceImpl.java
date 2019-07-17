@@ -64,4 +64,9 @@ public class OrderBillServiceImpl implements OrderBillService {
     public List<OrderBill> getLast5OrderBills() {
         return this.orderBillDAO.getLast5OrderBills();
     }
+
+    @Override
+    public List<OrderBill> getAllOrderBillByDateBetween(Date fromDate, Date toDate) {
+        return this.orderBillDAO.getAllOrderBillByDateBetween(fromDate,toDate);
+    }
 }
