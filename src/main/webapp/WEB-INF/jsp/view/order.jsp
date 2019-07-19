@@ -16,6 +16,11 @@
 </head>
 
 <body>
+<div class="navbar">
+    <a class="active" href="/start">&#127968 Home</a>
+    <a href="/statistic">&#9636 Thống Kê OrderBill</a>
+    <a href="">&#9196 Nhập Hàng</a>
+</div>
 <h3>Tạo OrderBill: </h3>
 <form:form method="post" action="/postorder" modelAttribute="orderBill">
     <div class="table-responsive">

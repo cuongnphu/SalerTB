@@ -3,7 +3,6 @@ package com.markettb.controller;
 
 import com.markettb.model.OrderBill;
 import com.markettb.model.StatisticOrder;
-import com.markettb.service.BillService;
 import com.markettb.service.OrderBillService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +21,12 @@ import java.util.List;
 public class StatisticController {
     private Logger log = Logger.getLogger(OrderBillController.class);
     private OrderBillService orderBillService;
-    private BillService billService;
 
     /*Inject object Services*/
     @Autowired
     public void setOrderBillService(OrderBillService orderBillService) {
         this.orderBillService = orderBillService;
     }
-
-    @Autowired
-    public void setBillService(BillService billService) {
-        this.billService = billService;
-    }
-
 
     /*START Statistic page*/
     @RequestMapping(value = "/statistic", method = RequestMethod.GET)

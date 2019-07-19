@@ -16,13 +16,20 @@
 </head>
 
 <body>
+<div class="navbar">
+    <a class="active" href="/start">&#127968 Home</a>
+    <a href="/statistic">&#9636 Thống Kê OrderBill</a>
+    <a href="">&#9196 Nhập Hàng</a>
+</div>
 <h3>Tra Cứu OrderBill: </h3>
 <form:form method="post" action="/statisticsale" modelAttribute="statisticOrder">
     <div class="table-responsive">
         <table class="table table-bordered" style="width: 600px">
             <tr>
-                <td>Từ:<form:input id="fromDate"  path="orderBillList[0].date" /></td>
-                <td>Đến:<form:input id="toDate"  path="orderBillList[${statisticOrder.orderBillList.size()-1}].date" /></td>
+                <td>Từ:<form:input id="fromDate" path="orderBillList[0].date"
+                                   placeholder="dd/MM/YYYY e.g:15/07/2019"/></td>
+                <td>Đến:<form:input id="toDate" path="orderBillList[${statisticOrder.orderBillList.size()-1}].date"
+                                    placeholder="dd/MM/YYYY"/></td>
             </tr>
             <tr>
                 <td></td>
@@ -48,19 +55,21 @@
             </thead>
             <tbody id="myStatistic">
             <c:if test="${statisticOrder.orderBillList.size() > 0}">
-            <c:forEach items="${statisticOrder.orderBillList}" var="order" varStatus="status">
-                <tr class="tb-row">
-                    <td>${status.index}</td>
-                    <td><fmt:formatDate value="${order.date}" pattern="dd/MM/yyyy"/></td>
-                    <td>${order.name}</td>
-                    <td>${order.total}</td>
-                </tr>
-            </c:forEach>
+                <c:forEach items="${statisticOrder.orderBillList}" var="order" varStatus="status">
+                    <tr class="tb-row">
+                        <td>${status.index}</td>
+                        <td><fmt:formatDate value="${order.date}" pattern="dd/MM/yyyy"/></td>
+                        <td>${order.name}</td>
+                        <td>${order.total}</td>
+                    </tr>
+                </c:forEach>
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>${statisticOrder.statisticTotal}</td>
+                    <td><c:set var="val" value="${statisticOrder.statisticTotal}"/>
+                        <fmt:setLocale value="en"/>
+                        <fmt:formatNumber value="${val}"/></td>
                 </tr>
             </c:if>
             </tbody>

@@ -15,6 +15,11 @@
     <script src="../../js/bill.js"></script>
 </head>
 <body>
+<div class="navbar">
+    <a class="active" href="/start">&#127968 Home</a>
+    <a href="/statistic">&#9636 Thống Kê OrderBill</a>
+    <a href="#">&#9196 Nhập Hàng</a>
+</div>
 <h3> Đơn Hàng :</h3>
 <div class="table-responsive">
     <div id="printDiv" class="container-fluid">
@@ -49,16 +54,12 @@
         </table>
     </div>
     <div align="right" style="width: 600px">
-        <div class="col-sm-4 p-0">
+        <div class="col-sm-6 p-0">
             <a class="btn-info btn"
                href="/orderdetail/${tabOrder.orderBill.id}">&#10094 Trờ Lại</a>
         </div>
-        <div class="col-sm-4 p-0">
+        <div class="col-sm-6 p-0">
             <a class="btn btn-info" onclick="orderScript.printDiv()">&#128229 In Bill</a>
-        </div>
-        <div class="col-sm-4 p-0">
-            <input class="btn btn-info" type="submit" value="&#127968 Trang Chủ"
-                   onclick="window.location.replace('/start')"/>
         </div>
     </div>
 </div>
