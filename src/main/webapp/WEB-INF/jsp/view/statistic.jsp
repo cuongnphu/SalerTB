@@ -8,7 +8,7 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Thống Kê OrderBill</title>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="/webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>

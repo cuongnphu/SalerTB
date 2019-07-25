@@ -8,7 +8,7 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Tạo OrderBill</title>
-    <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="/webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
@@ -19,7 +19,7 @@
 <div class="navbar">
     <a class="active" href="/start">&#127968 Home</a>
     <a href="/statistic">&#9636 Thống Kê OrderBill</a>
-    <a href="">&#9196 Nhập Hàng</a>
+    <a href="/product">&#9196 Nhập Hàng</a>
 </div>
 <h3>Tạo OrderBill: </h3>
 <form:form method="post" action="/postorder" modelAttribute="orderBill">
