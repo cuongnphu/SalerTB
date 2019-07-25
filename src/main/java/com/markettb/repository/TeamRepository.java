@@ -13,4 +13,5 @@ public interface TeamRepository extends JpaRepository<Team,Integer> {
     Team findById(int id);
     List<Team> findByTeamId(int team_id);
     List<Team> findByEnable(boolean enable);
+    List<Team> findByTeamIdAndEnable(int team_id,boolean enable);
 }

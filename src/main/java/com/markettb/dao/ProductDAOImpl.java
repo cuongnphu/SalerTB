@@ -38,8 +38,8 @@ public class ProductDAOImpl implements ProductDAO {
 
     /*DELETE a particular Product*/
     @Override
-    public void deleteProduct(Product product) {
-        this.productRepository.delete(product);
+    public void deleteProduct(int id) {
+        this.productRepository.deleteById(id);
     }
 
     /* GET a particular Product By Id*/

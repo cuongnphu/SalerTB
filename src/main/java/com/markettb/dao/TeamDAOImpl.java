@@ -72,4 +72,9 @@ public class TeamDAOImpl implements TeamDAO {
     public List<Team> getAllTeamsByActive() {
         return this.teamRepository.findByEnable(true);
     }
+
+    @Override
+    public List<Team> getAllTeamsByTeamIdAndActive(int team_id, boolean enable) {
+        return this.teamRepository.findByTeamIdAndEnable(team_id,enable);
+    }
 }

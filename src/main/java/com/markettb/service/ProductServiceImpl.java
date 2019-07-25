@@ -39,9 +39,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(Product product) {
-        if(product.getId()!= 0)
-            this.productDAO.deleteProduct(product);
+    public void deleteProduct(int id) {
+        if(id > 0)
+            this.productDAO.deleteProduct(id);
     }
 
     @Override

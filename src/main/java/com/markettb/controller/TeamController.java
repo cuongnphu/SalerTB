@@ -115,5 +115,12 @@ public class TeamController {
         return new ModelAndView("redirect:/teams");
     }
 
+    @RequestMapping(value = "/listactiveteam",method = RequestMethod.POST)
+    public @ResponseBody List<Team> getListActiveTeams(){
+        /*Get All teams with status enable by True*/
+        List<Team> teamList = this.teamService.getAllTeamsByActive();
+        return teamList;
+    }
+
 
 }

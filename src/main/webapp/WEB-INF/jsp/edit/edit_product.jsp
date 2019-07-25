@@ -7,7 +7,7 @@
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Nhập Hàng Vô Kho</title>
+    <title>Cập Nhật Lại Nhập Kho</title>
     <link rel="stylesheet" href="../webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -16,13 +16,8 @@
 </head>
 
 <body>
-<div class="navbar">
-    <a class="active" href="/start">&#127968 Home</a>
-    <a href="/statistic">&#9636 Thống Kê OrderBill</a>
-    <a href="/product/0">&#9196 Nhập Hàng</a>
-</div>
-<h3>Nhập Hàng Vô Kho :</h3>
-<form:form method="post" action="/postproduct" modelAttribute="product">
+<h3>Cập Nhật Lại Nhập Kho :</h3>
+<form:form method="post" action="/updateproduct" modelAttribute="product">
     <div class="table-responsive">
         <div>
             <form:input type="text" path="id" readonly="true" hidden="true"/>
@@ -34,7 +29,6 @@
             <table class="table table-bordered" style="width: 600px;">
                 <thead class="thead">
                 <tr>
-                    <th>Sắp Xếp Alphabet</th>
                     <th>Tên Nhà Sản Xuất</th>
                     <th>S.Lượng (Ri)</th>
                     <th>Giá : $(K)</th>
@@ -43,19 +37,7 @@
                 <tbody id="myProduct">
                 <tr class="tb-row">
                     <td>
-                        <select id="alphabetTeamId">
-                            <option value="" disabled selected>ABC...</option>
-                            <option value="1">A</option>
-                            <option value="2">B</option>
-                            <option value="3">C</option>
-                        </select>
-                    </td>
-                    <td>
-                        <form:select id="nameProduct" path="name">
-                            <c:forEach items="${teamList}" var="team">
-                                <form:option value="${team.name}">${team.name}</form:option>
-                            </c:forEach>
-                        </form:select>
+                        <form:input id="nameProduct" path="name" readonly="true" cssStyle="background: gainsboro"/>
                     </td>
                     <td><form:input type="text" path="quantity" onfocus="if(this.value == '0'){this.value ='';}"/></td>
                     <td><form:input type="text" path="price" onfocus="if(this.value == '0'){this.value = '';}"/></td>
@@ -66,10 +48,10 @@
         <br>
         <div align="right" style="width: 600px">
             <div class="col-sm-8 p-0">
-                <a class="btn-info btn" href="/start">&#10094 Thoát</a>
+                <a class="btn-info btn" href="/product/0">&#10094 Thoát</a>
             </div>
             <div class="col-sm-4 p-0">
-                <input class="btn btn-info" type="submit" value="Hoàn Thành"
+                <input class="btn btn-info" type="submit" value="Cập Nhật"
                        onclick="return productScript.productValidateForm()"/>
             </div>
         </div>
@@ -88,7 +70,6 @@
                 <th>S.Lượng (Ri)</th>
                 <th>Giá $(K)</th>
                 <th>Tổng Tiền $(K)</th>
-                <th>#</th>
             </tr>
             </thead>
             <tbody id="listProduct">
@@ -101,10 +82,6 @@
                     <td>${prod.quantity}</td>
                     <td>${prod.price}</td>
                     <td>${prod.total}</td>
-                    <td>
-                        <p><a class="btn-info btn-sm" href="/editproduct/${prod.id}">&#9998</a></p>
-                        <p><a class="btn-info btn-sm" onclick="productScript.productConfirmDelete(${prod.id})">&#9940</a></p>
-                    </td>
                 </tr>
             </c:forEach>
             </tbody>

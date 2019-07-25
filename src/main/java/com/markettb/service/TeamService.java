@@ -23,4 +23,5 @@ public interface TeamService {
     public List<Team> getAllTeamsByTeamId(int team_id);
 
     public List<Team> getAllTeamsByActive();
+    public List<Team> getAllTeamsByTeamIdAndActive(int team_id,boolean enable);
 }
