@@ -59,4 +59,9 @@ public class ProductDAOImpl implements ProductDAO {
     public List<Product> getLast5Products() {
         return this.productRepository.findFirst5ByOrderByIdDesc();
     }
+
+    @Override
+    public List<Product> getAllProductsByName(String name) {
+        return this.productRepository.findByName(name);
+    }
 }

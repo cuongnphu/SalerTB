@@ -14,3 +14,10 @@ var statisticScript = {
 
     }
 };
+
+$(document).ready(function () {
+    $("#alphabetTeamId").change(function () {
+        var team_id = $("#alphabetTeamId").val();
+        window.location.replace('/statisticproduct?teamId=' + team_id +'&teamName=');
+    });
+})

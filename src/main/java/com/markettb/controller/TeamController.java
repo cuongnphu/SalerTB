@@ -24,6 +24,7 @@ public class TeamController {
         this.teamService = teamService;
     }
 
+    /* GET Team Home page*/
     @RequestMapping(value = "/teams", method = RequestMethod.GET)
     public ModelAndView listTeams(@ModelAttribute("modelteam") Team team) {
         // Initialize a ModelAndView
@@ -42,11 +43,13 @@ public class TeamController {
         return model;
     }
 
+    /*POST a new Team*/
     @RequestMapping(value = "/team",method=RequestMethod.POST)
     public ModelAndView saveTeam (@ModelAttribute("modelteam") Team team) {
-        if(this.teamService.getTeamById(team.getId()) != null)
+        if(this.teamService.getTeamById(team.getId()) != null) {
+            log.info("Update a Team by teamId = "+ team.getId());
             this.teamService.updateTeam(team);
-        else {
+        }else {
             log.info("Create a new Team !!!");
             this.teamService.saveTeam(team);
         }
@@ -54,6 +57,7 @@ public class TeamController {
         return new ModelAndView("redirect:/teams");
     }
 
+    /*POST for checking teamName is exist*/
     @RequestMapping(value = "/checkteam", method = RequestMethod.POST)
     public @ResponseBody boolean checkTeamName(String nameCheck, int teamIdCheck) {
         // Get all Teams
@@ -65,6 +69,7 @@ public class TeamController {
         return true;
     }
 
+    /*GET editing page for Team by Id*/
     @RequestMapping(value = "/editteam/{id}",method = RequestMethod.GET)
     public ModelAndView editTeam (@ModelAttribute("modelteam") Team team , @PathVariable("id") int id) {
         // Initilaize a new Model
@@ -87,6 +92,7 @@ public class TeamController {
         return model;
     }
 
+    /*UPDATE a particular team*/
     @RequestMapping(value = "/updateteam",method = RequestMethod.POST)
     public ModelAndView updateTeam(@ModelAttribute("modelTeam") Team team){
         if(this.teamService.getTeamById(team.getId()) != null){
@@ -100,6 +106,7 @@ public class TeamController {
         return new ModelAndView("redirect:/teams");
     }
 
+    /*DELETE a Team */
     @RequestMapping(value = "/deleteteam/{id}")
     public ModelAndView deleteTeam(@PathVariable("id") int id){
         // Get Team by Id
@@ -115,6 +122,7 @@ public class TeamController {
         return new ModelAndView("redirect:/teams");
     }
 
+    /*POST for getting list active Team*/
     @RequestMapping(value = "/listactiveteam",method = RequestMethod.POST)
     public @ResponseBody List<Team> getListActiveTeams(){
         /*Get All teams with status enable by True*/

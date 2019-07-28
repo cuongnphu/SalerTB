@@ -19,7 +19,7 @@
 <div class="navbar">
     <a class="active" href="/start">&#127968 Home</a>
     <a href="/statistic">&#9636 Thống Kê OrderBill</a>
-    <a href="#">&#9196 Nhập Hàng</a>
+    <a href="/product?teamId=0">&#9196 Nhập Hàng</a>
 </div>
 <h3> Đơn Hàng :</h3>
 <div class="table-responsive">

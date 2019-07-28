@@ -7,40 +7,54 @@
 <head>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <title>Cập Nhật Lại Nhập Kho</title>
+    <title>Thống Kê Nhà Sản Xuất</title>
     <link rel="stylesheet" href="../webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../webjars/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../../js/product.js"></script>
+    <script src="../../js/statistic.js"></script>
 </head>
 
 <body>
-<h3>Cập Nhật Lại Nhập Kho :</h3>
-<form:form method="post" action="/updateproduct" modelAttribute="product">
+<div class="navbar">
+    <a class="active" href="/start">&#127968 Home</a>
+    <a href="/statistic">&#9636 Thống Kê OrderBill</a>
+    <a href="/product?teamId=0">&#9196 Nhập Hàng</a>
+</div>
+<h3>Tra Cứu Nhà Sản Xuất :</h3>
+<form:form method="post" action="/poststatisticproduct" modelAttribute="modelTeam">
     <div class="table-responsive">
         <div>
             <form:input type="text" path="id" readonly="true" hidden="true"/>
-            <form:input type="date" path="date" readonly="true" hidden="true"/>
             <form:input type="text" path="total" readonly="true" hidden="true"/>
+            <form:input type="text" path="enable" readonly="true" hidden="true"/>
         </div>
         <br>
         <div class="container-fluid">
             <table class="table table-bordered" style="width: 600px;">
                 <thead class="thead">
                 <tr>
+                    <th>Sắp Xếp Alphabet</th>
                     <th>Tên Nhà Sản Xuất</th>
-                    <th>S.Lượng (Ri)</th>
-                    <th>Giá : $(K)</th>
                 </tr>
                 </thead>
                 <tbody id="myProduct">
                 <tr class="tb-row">
                     <td>
-                        <form:input id="nameProduct" path="name" readonly="true" cssStyle="background: gainsboro"/>
+                        <form:select id="alphabetTeamId" path="teamId">
+                            <option value="" disabled selected>ABC...</option>
+                            <option value="1">A</option>
+                            <option value="2">B</option>
+                            <option value="3">C</option>
+                        </form:select>
                     </td>
-                    <td><form:input type="text" path="quantity" onfocus="if(this.value == '0'){this.value ='';}"/></td>
-                    <td><form:input type="text" path="price" onfocus="if(this.value == '0'){this.value = '';}"/></td>
+                    <td>
+                        <form:select id="nameProduct" path="name">
+                            <c:forEach items="${teamList}" var="team">
+                                <form:option value="${team.name}">${team.name}</form:option>
+                            </c:forEach>
+                        </form:select>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -48,17 +62,16 @@
         <br>
         <div align="right" style="width: 600px">
             <div class="col-sm-8 p-0">
-                <a class="btn-info btn" href="/product?teamId=0">&#10094 Thoát</a>
+                <a class="btn-info btn" href="/start">&#10094 Thoát</a>
             </div>
             <div class="col-sm-4 p-0">
-                <input class="btn btn-info" type="submit" value="Cập Nhật"
-                       onclick="return productScript.productValidateForm()"/>
+                <input class="btn btn-info" type="submit" value="Hoàn Thành"/>
             </div>
         </div>
     </div>
 </form:form>
 <br>
-<h4 style="color: red"> Danh Sách Nhập Hàng Kho :</h4>
+<h4 style="color: red"> Kết Quả Tra Cứu Nhập Hàng Kho :</h4>
 <div class="table-responsive">
     <div class="container-fluid">
         <table class="table table-bordered" style="width: 600px">
@@ -73,8 +86,8 @@
             </tr>
             </thead>
             <tbody id="listProduct">
-            <c:if test="${productList.size() > 0}">
-            <c:forEach items="${productList}" var="prod" varStatus="status">
+            <c:if test="${statisticProduct.productList.size() > 0}">
+            <c:forEach items="${statisticProduct.productList}" var="prod" varStatus="status">
                 <tr class="tb-row">
                     <td>${status.index}</td>
                     <td><fmt:formatDate value="${prod.date}" pattern="dd/MM/yyyy"/></td>
@@ -84,6 +97,16 @@
                     <td>${prod.total}</td>
                 </tr>
             </c:forEach>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><c:set var="val" value="${statisticProduct.statisticTotal}"/>
+                    <fmt:setLocale value="en"/>
+                    <fmt:formatNumber value="${val}"/></td>
+            </tr>
             </tbody>
             </c:if>
         </table>

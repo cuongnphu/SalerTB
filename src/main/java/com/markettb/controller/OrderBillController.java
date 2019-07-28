@@ -26,18 +26,18 @@ public class OrderBillController {
 
     /*Inject object Services*/
     @Autowired
-    public void setOrderBillService(OrderBillService orderBillService){
+    public void setOrderBillService(OrderBillService orderBillService) {
         this.orderBillService = orderBillService;
     }
 
     @Autowired
-    public void setBillService(BillService billService){
+    public void setBillService(BillService billService) {
         this.billService = billService;
     }
 
     /* START HomePage*/
-    @RequestMapping(value="/start",method = RequestMethod.GET)
-    public ModelAndView getStart(@ModelAttribute("orderBill") OrderBill orderBill){
+    @RequestMapping(value = "/start", method = RequestMethod.GET)
+    public ModelAndView getStart(@ModelAttribute("orderBill") OrderBill orderBill) {
         // Initialize a ModelAndView
         ModelAndView model = new ModelAndView("view/order");
 
@@ -45,21 +45,21 @@ public class OrderBillController {
         List<OrderBill> orderBillList = this.orderBillService.getLast5OrderBills();
 
         /* SETTER for model attribute*/
-        model.addObject("listOrderBill",orderBillList);
+        model.addObject("listOrderBill", orderBillList);
         return model;
     }
 
     /* POST new a OrderBill */
-    @RequestMapping(value = "/postorder",method = RequestMethod.POST)
-    public ModelAndView saveOrderBill(@ModelAttribute("orderBill") OrderBill orderBill){
+    @RequestMapping(value = "/postorder", method = RequestMethod.POST)
+    public ModelAndView saveOrderBill(@ModelAttribute("orderBill") OrderBill orderBill) {
         log.info("Create a new OrderBill !!! ");
         int id = this.orderBillService.saveGetIdOrderBill(orderBill);
-        return new ModelAndView("redirect:/orderdetail/"+id);
+        return new ModelAndView("redirect:/orderdetail/" + id);
     }
 
     /* GET a OrderBill detail  */
-    @RequestMapping(value = "/orderdetail/{id}",method = RequestMethod.GET)
-    public ModelAndView createOrderDetail(@ModelAttribute("tabOrder")TabOrder tabOrder, @PathVariable("id") int id){
+    @RequestMapping(value = "/orderdetail/{id}", method = RequestMethod.GET)
+    public ModelAndView createOrderDetail(@ModelAttribute("tabOrder") TabOrder tabOrder, @PathVariable("id") int id) {
         // Initialize a ModelAndView
         ModelAndView model = new ModelAndView("view/orderdetail");
 
@@ -69,7 +69,9 @@ public class OrderBillController {
 
         // Get List Bills by Order_Id
         List<Bill> billList = this.billService.getAllBillsByOrderId(id);
-        for(int i = 0; i < 5 ; i++){
+
+        /* Add more 5 bill in list for input data easy*/
+        for (int i = 0; i < 5; i++) {
             Bill bill = new Bill();
             bill.setOrderId(id);
             billList.add(bill);
@@ -80,20 +82,20 @@ public class OrderBillController {
         tabOrder.setOrderBill(orderBill);
 
         /*ModelView add Object*/
-        model.addObject("tabOrder",tabOrder);
+        model.addObject("tabOrder", tabOrder);
 
         return model;
     }
 
     /* POST a OrderBill detail  : OrderBill and Bills*/
-    @RequestMapping(value = "/postorderdetail",method = RequestMethod.POST)
-    public ModelAndView saveOrderDetail(@ModelAttribute("tabOrder") TabOrder tabOrder){
+    @RequestMapping(value = "/postorderdetail", method = RequestMethod.POST)
+    public ModelAndView saveOrderDetail(@ModelAttribute("tabOrder") TabOrder tabOrder) {
         int totalOrderBill = 0;
 
         // Save or Update Bill
         if (tabOrder.getBillList() != null) {
             for (int i = 0; i < tabOrder.getBillList().size(); i++)
-                if(tabOrder.getBillList().get(i).getPrice() > 0 && tabOrder.getBillList().get(i).getQuantity() > 0) {
+                if (tabOrder.getBillList().get(i).getPrice() > 0 && tabOrder.getBillList().get(i).getQuantity() > 0) {
                     int total = tabOrder.getBillList().get(i).getPrice() * tabOrder.getBillList().get(i).getQuantity();
                     totalOrderBill += total;
                     if (this.billService.getBillById(tabOrder.getBillList().get(i).getId()) != null) {
@@ -114,23 +116,24 @@ public class OrderBillController {
             this.orderBillService.updateOrderBill(orderBill);
         }
 
-        int order_Id =  tabOrder.getOrderBill().getId();
+        /* Redirect Print OrderBill page */
+        int order_Id = tabOrder.getOrderBill().getId();
         return new ModelAndView("redirect:/printorderdetail/" + order_Id);
     }
 
     /* DELETE a OrderBill when not include Bills */
     @RequestMapping(value = "/deleteorder/{id}")
-    public ModelAndView deleteOrderBill(@PathVariable("id") int id){
-        /*Delete a OrderBill*/
+    public ModelAndView deleteOrderBill(@PathVariable("id") int id) {
+        /*Delete a OrderBill when it does not include Bill*/
         List<Bill> billList = this.billService.getAllBillsByOrderId(id);
-        if(billList.size() == 0)
+        if (billList.size() == 0)
             this.orderBillService.deleteOrderBill(id);
-        else{
+        else {
             int totalOrderBill = 0;
 
             /*GET total of OrderBill*/
-            for(int i = 0; i < billList.size();i++)
-                if(billList.get(i).getPrice() > 0 && billList.get(i).getQuantity() > 0)
+            for (int i = 0; i < billList.size(); i++)
+                if (billList.get(i).getPrice() > 0 && billList.get(i).getQuantity() > 0)
                     totalOrderBill += (billList.get(i).getPrice() * billList.get(i).getQuantity());
 
             // Update new total for OrderBill
@@ -144,9 +147,9 @@ public class OrderBillController {
         return new ModelAndView("redirect:/start");
     }
 
-    /* GOTO print OrderBill detail page*/
-    @RequestMapping(value = "/printorderdetail/{id}",method = RequestMethod.GET)
-    public ModelAndView printOrderDetail(@PathVariable("id") int id){
+    /* GOTO Print OrderBill detail page*/
+    @RequestMapping(value = "/printorderdetail/{id}", method = RequestMethod.GET)
+    public ModelAndView printOrderDetail(@PathVariable("id") int id) {
         // Initialize a ModelAndView
         ModelAndView model = new ModelAndView("view/printdetail");
 
@@ -163,7 +166,7 @@ public class OrderBillController {
         tabOrder.setOrderBill(orderBill);
 
         /*ModelView add Object*/
-        model.addObject("tabOrder",tabOrder);
+        model.addObject("tabOrder", tabOrder);
 
         return model;
     }

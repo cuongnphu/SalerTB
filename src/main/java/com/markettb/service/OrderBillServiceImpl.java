@@ -2,6 +2,7 @@ package com.markettb.service;
 
 import com.markettb.dao.OrderBillDAO;
 import com.markettb.model.OrderBill;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Service
 public class OrderBillServiceImpl implements OrderBillService {
 
+    private Logger log = Logger.getLogger(OrderBillServiceImpl.class);
     private OrderBillDAO orderBillDAO;
 
     @Autowired
@@ -47,7 +49,11 @@ public class OrderBillServiceImpl implements OrderBillService {
 
     @Override
     public void deleteOrderBill(int id) {
-        this.orderBillDAO.deleteOrderBill(id);
+        if(id > 0) {
+            log.info("DELETE a Order by Id = " + id);
+            this.orderBillDAO.deleteOrderBill(id);
+        }else
+            log.info("==================== WARNING: Cannot DELETE a OrderBill with incorrect Id");
     }
 
     @Override

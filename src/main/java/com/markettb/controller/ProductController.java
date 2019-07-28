@@ -9,10 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.jws.WebParam;
@@ -26,6 +23,7 @@ public class ProductController {
     private ProductService productService;
     private TeamService teamService;
 
+    /*Inject service to controller */
     @Autowired
     public void setProductService(ProductService productService){
         this.productService = productService;
@@ -36,15 +34,16 @@ public class ProductController {
         this.teamService = teamService;
     }
 
-    @RequestMapping(value = "/product/{team_id}",method = RequestMethod.GET)
-    public ModelAndView getProduct(@ModelAttribute("product")Product product, @PathVariable("team_id")int team_id){
+    /*GET Product page */
+    @RequestMapping(value = "/product",params = "teamId",method = RequestMethod.GET)
+    public ModelAndView getProduct(@ModelAttribute("product")Product product, @RequestParam("teamId")int team_id){
         /*Initialize ModelAndView*/
         ModelAndView model = new ModelAndView("view/product");
 
         /* GET last 5 Product */
         List<Product> productList = this.productService.getLast5Products();
 
-        /*GET list team by team_id*/
+        /*GET list team by team_id & enable == true*/
         List<Team> teamList = null;
         if(team_id == 0)
             teamList = this.teamService.getAllTeamsByActive();
@@ -57,13 +56,15 @@ public class ProductController {
         return model;
     }
 
+    /*POST a new Product*/
     @RequestMapping(value = "/postproduct",method = RequestMethod.POST)
     public ModelAndView postProduct(@ModelAttribute("product")Product product){
         log.info("Create a new Product !!!");
         this.productService.saveProduct(product);
-        return new ModelAndView("redirect:/product/0");
+        return new ModelAndView("redirect:/product?teamId=0");
     }
 
+    /* GET a edit page of Product */
     @RequestMapping(value = "/editproduct/{id}",method = RequestMethod.GET)
     public ModelAndView editProduct(@ModelAttribute("product")Product product,@PathVariable("id")int id){
         /*Initialzie ModelAndView */
@@ -82,6 +83,7 @@ public class ProductController {
         return model;
     }
 
+    /* UPDATE a particular Product*/
     @RequestMapping(value = "/updateproduct",method = RequestMethod.POST)
     public ModelAndView updateProduct(@ModelAttribute("product")Product product){
         if(this.productService.getProductById(product.getId())!= null){
@@ -92,9 +94,10 @@ public class ProductController {
             this.productService.saveProduct(product);
         }
 
-        return new ModelAndView("redirect:/product/0");
+        return new ModelAndView("redirect:/product?teamId=0");
     }
 
+    /*DELETE a particular Product*/
     @RequestMapping(value = "/deleteproduct/{id}")
     public ModelAndView deleteProduct(@PathVariable("id")int id){
         /*DELETE a product by Id*/
@@ -103,8 +106,7 @@ public class ProductController {
             this.productService.deleteProduct(id);
         }
 
-        return new ModelAndView("redirect:/product/0");
-
+        return new ModelAndView("redirect:/product?teamId=0");
     }
 
 }

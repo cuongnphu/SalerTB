@@ -58,4 +58,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getLast5Products() {
         return this.productDAO.getLast5Products();
     }
+
+    @Override
+    public List<Product> getAllProductsByName(String name) {
+        return this.productDAO.getAllProductsByName(name);
+    }
 }

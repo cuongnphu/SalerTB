@@ -28,6 +28,6 @@ var productScript = {
 $(document).ready(function () {
     $("#alphabetTeamId").change(function () {
         var team_id = $("#alphabetTeamId").val();
-        window.location.replace('/product/' + team_id);
+        window.location.replace('/product?teamId=' + team_id);
     });
 })

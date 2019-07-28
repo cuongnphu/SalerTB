@@ -13,4 +13,5 @@ public interface ProductDAO {
     public Product getProductById(int id);
     public List<Product> getAllProducts();
     public List<Product> getLast5Products();
+    public List<Product> getAllProductsByName(String name);
 }

@@ -2,6 +2,7 @@ package com.markettb.service;
 
 import com.markettb.dao.BillDAO;
 import com.markettb.model.Bill;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Service
 public class BillServiceImpl implements BillService {
 
+    private Logger log = Logger.getLogger(BillServiceImpl.class);
     private BillDAO billDAO;
 
     @Autowired
@@ -40,12 +42,22 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public void deleteBill(int id) {
-        this.billDAO.deleteBill(id);
+        if(id > 0){
+            log.info("Delete a Bill by Id = " + id);
+            this.billDAO.deleteBill(id);
+        }else
+            log.info("======================== WARNING: CANNOT Delete Bill by Id incorrect");
     }
 
     @Override
     public Bill getBillById(int id) {
-        return this.billDAO.getBillById(id);
+        if(id > 0)
+            return this.billDAO.getBillById(id);
+        else{
+            log.info("============== WARNING: Get Bill By Id not exist ================= ");
+            return null;
+        }
+
     }
 
     @Override
@@ -55,6 +67,11 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public List<Bill> getAllBillsByOrderId(int order_id) {
-        return this.billDAO.getAllBillsByOrderId(order_id);
+        if(order_id > 0)
+            return this.billDAO.getAllBillsByOrderId(order_id);
+        else {
+            log.info("===================== WARNING: Get All Bills with OrderId not Exist ========================");
+            return null;
+        }
     }
 }
