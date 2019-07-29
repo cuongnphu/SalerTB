@@ -53,12 +53,18 @@ public class OrderBillServiceImpl implements OrderBillService {
             log.info("DELETE a Order by Id = " + id);
             this.orderBillDAO.deleteOrderBill(id);
         }else
-            log.info("==================== WARNING: Cannot DELETE a OrderBill with incorrect Id");
+            log.info("==================== WARNING: Cannot DELETE a OrderBill with incorrect Id  ===================");
     }
 
     @Override
     public OrderBill getOrderBillById(int id) {
-        return this.orderBillDAO.getOrderBillById(id);
+        if(id > 0)
+            return this.orderBillDAO.getOrderBillById(id);
+        else{
+            log.info("================= WARNING: Get OrderBill by Incorrect Id ==============");
+            return null;
+        }
+
     }
 
     @Override

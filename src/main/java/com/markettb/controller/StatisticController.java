@@ -91,6 +91,9 @@ public class StatisticController {
         statistic.setOrderBillList(orderBillList);
         statistic.setStatisticTotal(total);
 
+        log.info("Get statistic Sale from Date : " + statisticOrder.getOrderBillList().get(0).getDate() + "to Date: "
+                + statisticOrder.getOrderBillList().get(statisticOrder.getOrderBillList().size() - 1).getDate());
+
         // SETTER for model attribute
         model.addObject("statisticOrder", statistic);
         return model;
@@ -114,34 +117,36 @@ public class StatisticController {
         List<Product> productList = null;
 
         /*GET ListProduct by teamName*/
-        if(teamName != null)
+        if (teamName != null)
             productList = this.productService.getAllProductsByName(teamName);
         else
             productList = this.productService.getLast5Products();
 
         int total = 0;
-        for(int i=0;i<productList.size();i++)
+        for (int i = 0; i < productList.size(); i++)
             total += productList.get(i).getTotal();
         statisticProduct.setProductList(productList);
         statisticProduct.setStatisticTotal(total);
 
         /*SETTER for Model Attribute*/
         model.addObject("teamList", teamList);
-        model.addObject("statisticProduct",statisticProduct);
+        model.addObject("statisticProduct", statisticProduct);
 
         return model;
     }
 
     /*POST request statistic Product*/
-    @RequestMapping(value = "/poststatisticproduct",method = RequestMethod.POST)
-    public ModelAndView postStatisticProduct(@ModelAttribute("modelTeam") Team team){
+    @RequestMapping(value = "/poststatisticproduct", method = RequestMethod.POST)
+    public ModelAndView postStatisticProduct(@ModelAttribute("modelTeam") Team team) {
         String teamName = team.getName();
-        String encodedName ="";
+        String encodedName = "";
         try {
             encodedName = URLEncoder.encode(teamName, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
+        log.info("GET statistic Product with team Name is : "+ encodedName);
         return new ModelAndView("redirect:/statisticproduct?teamId=" + 0 + "&teamName=" + encodedName);
     }
 

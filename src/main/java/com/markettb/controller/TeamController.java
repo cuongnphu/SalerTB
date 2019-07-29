@@ -113,10 +113,9 @@ public class TeamController {
         Team teamer = this.teamService.getTeamById(id);
 
         /*Only DELETE team when it is stop*/
-        if(teamer.isEnable() == false){
-            log.info("Delete an Team by id = " + id );
+        if(teamer.isEnable() == false)
             this.teamService.deleteTeam(id);
-        }else
+        else
             log.info(" ==================== Action DELETE Team is not correctly !!!!  ============================== " + "\n" );
 
         return new ModelAndView("redirect:/teams");

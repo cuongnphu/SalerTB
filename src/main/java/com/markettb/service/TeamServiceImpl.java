@@ -2,6 +2,7 @@ package com.markettb.service;
 
 import com.markettb.dao.TeamDAO;
 import com.markettb.model.Team;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 public class TeamServiceImpl implements TeamService {
-
+    private Logger log = Logger.getLogger(TeamServiceImpl.class);
     private TeamDAO teamDAO;
 
     @Autowired
@@ -25,18 +26,26 @@ public class TeamServiceImpl implements TeamService {
             team.setTotal(0);
             team.setEnable(true);
             this.teamDAO.saveTeam(team);
-        }
+        }else
+            log.info("===================== WARNING : Cannot SAVE team with name is Blank / spacebar ....  =================");
     }
 
     @Override
     public void updateTeam(Team team) {
         if(team.getName()!= "")
             this.teamDAO.updateTeam(team);
+        else
+            log.info("===================== WARNING: Cannot UPDATE a Team when teamName is Blank, Spacebar .... =================== ");
     }
 
     @Override
     public void deleteTeam(int id) {
-        this.teamDAO.deleteTeam(id);
+        if(id > 0) {
+            log.info("Delete an Team by id = " + id );
+            this.teamDAO.deleteTeam(id);
+        }
+        else
+            log.info("==================== WARNING : Cannot DELETE a Team with Incorrect Id ======================== ");
     }
 
     @Override
@@ -44,7 +53,7 @@ public class TeamServiceImpl implements TeamService {
         if(id != 0)
             return this.teamDAO.getTeamById(id);
         else
-            return this.teamDAO.getTeamById(0);
+            return null;
     }
 
     @Override
@@ -59,7 +68,10 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public List<Team> getAllTeamsByTeamId(int team_id) {
-        return this.teamDAO.getAllTeamsByTeamId(team_id);
+        if(team_id > 0)
+            return this.teamDAO.getAllTeamsByTeamId(team_id);
+        else
+            return null;
     }
 
     @Override

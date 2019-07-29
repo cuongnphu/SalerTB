@@ -3,6 +3,7 @@ package com.markettb.service;
 import com.markettb.dao.ProductDAO;
 import com.markettb.model.Product;
 import net.bytebuddy.asm.Advice;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
+    private Logger log = Logger.getLogger(ProductServiceImpl.class);
     private ProductDAO productDAO;
 
     @Autowired
@@ -40,13 +41,20 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(int id) {
-        if(id > 0)
+        if(id > 0){
+            log.info("DELETE a Product by Id = "+ id);
             this.productDAO.deleteProduct(id);
+        }
     }
 
     @Override
     public Product getProductById(int id) {
-        return this.productDAO.getProductById(id);
+        if(id > 0)
+            return this.productDAO.getProductById(id);
+        else {
+            log.info("====================== WARNING: Get Product with Incorrect Id =========================");
+            return null;
+        }
     }
 
     @Override
@@ -61,6 +69,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAllProductsByName(String name) {
-        return this.productDAO.getAllProductsByName(name);
+        if(name != null)
+            return this.productDAO.getAllProductsByName(name);
+        else{
+            log.info("======================= WARNING : Get Product with Name is Null =================== ");
+            return null;
+        }
     }
 }

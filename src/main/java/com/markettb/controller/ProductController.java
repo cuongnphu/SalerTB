@@ -101,11 +101,7 @@ public class ProductController {
     @RequestMapping(value = "/deleteproduct/{id}")
     public ModelAndView deleteProduct(@PathVariable("id")int id){
         /*DELETE a product by Id*/
-        if(id > 0){
-            log.info("DELETE a Product by Id = "+ id);
-            this.productService.deleteProduct(id);
-        }
-
+        this.productService.deleteProduct(id);
         return new ModelAndView("redirect:/product?teamId=0");
     }
 
