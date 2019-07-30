@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +64,9 @@ public class TeamController {
     public @ResponseBody boolean checkTeamName(String nameCheck, int teamIdCheck) {
         // Get all Teams
         List<Team> listTeams = this.teamService.getAllTeams();
-        for(int i = 0; i < listTeams.size();i++)
-            if(nameCheck.trim().equalsIgnoreCase(listTeams.get(i).getName().trim()) )
+
+        for(int i = 0; i < listTeams.size(); i++)
+            if(nameCheck.replaceAll("\\s+","").equalsIgnoreCase(listTeams.get(i).getName().replaceAll("\\s+","")))
                 return false;
 
         return true;

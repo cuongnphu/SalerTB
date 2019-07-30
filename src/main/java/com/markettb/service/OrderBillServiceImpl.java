@@ -23,7 +23,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 
     @Override
     public void saveOrderBill(OrderBill orderBill) {
-        if(orderBill.getName()!=""){
+        if(orderBill.getName()!="" && orderBill.getName() != null){
             orderBill.setTotal(0);
             orderBill.setDate(new Date());
             this.orderBillDAO.saveOrderBill(orderBill);
@@ -32,7 +32,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 
     @Override
     public int saveGetIdOrderBill(OrderBill orderBill) {
-        if(orderBill.getName()!=""){
+        if(orderBill.getName()!= "" && orderBill.getName() != null){
             orderBill.setTotal(0);
             orderBill.setDate(new Date());
             return this.orderBillDAO.saveGetIdOrderBill(orderBill);
@@ -42,7 +42,7 @@ public class OrderBillServiceImpl implements OrderBillService {
 
     @Override
     public void updateOrderBill(OrderBill orderBill) {
-        if(orderBill.getName()!="")
+        if(orderBill.getName()!= "" && orderBill.getName() != null)
             this.orderBillDAO.updateOrderBill(orderBill);
 
     }

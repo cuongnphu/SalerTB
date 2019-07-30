@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../../css/general.css"/>
     <script src="../webjars/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="../webjars/jquery/3.3.1/jquery.min.js"></script>
-    <script src="../../js/order.js"></script>
+
     <script src="../../js/bill.js"></script>
 </head>
 
@@ -25,7 +25,7 @@
             <form:input type="text" path="orderBill.total" readonly="true" hidden="true"/>
         </div>
         <div>
-            <label>Tên Khách Hàng : </label> <form:input id="nameOrder" type="text" path="orderBill.name"/>
+            <label>Tên Khách Hàng : </label> <form:input id="nameOrder" type="text" path="orderBill.name" />
         </div>
         <br>
         <div class="container-fluid">

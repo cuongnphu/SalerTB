@@ -69,8 +69,16 @@ function addBill(orderId, intIndex) {
 
 var billScript = {
     editOrderValidateForm: function () {
+        var nameTests = document.getElementById('nameOrder').value;
         var priceBill = $("#myBill > tr.tb-row > td > input[id*=price]");
         var quantityBill = $("#myBill > tr.tb-row > td > input[id*=quantity]");
+
+        /*Case: Name Order is Incorrectly*/
+        if(nameTests == "") {
+            document.getElementById('nameOrder').style.borderColor = "red";
+            return false;
+        } else
+            document.getElementById('nameOrder').style.borderColor = "";
 
         /*Case: Click button Hoàn Thành without input data in index 1*/
         if (isNaN(quantityBill.get(0).value) || quantityBill.get(0).value <= 0 || quantityBill.get(0).value == "") {
