@@ -33,7 +33,34 @@ public class SecureConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/start").authenticated()
+                /*Authorized for OrderBill Controller*/
+                .antMatchers("/start").hasAnyRole("ADMIN","USER")
+                .antMatchers("/postorder").hasAnyRole("ADMIN","USER")
+                .antMatchers("/orderdetail/**").hasAnyRole("ADMIN","USER")
+                .antMatchers("/postorderdetail").hasAnyRole("ADMIN","USER")
+                .antMatchers("/deleteorder/**").hasAnyRole("ADMIN","USER")
+                .antMatchers("/printorderdetail/**").hasAnyRole("ADMIN","USER")
+                /*Authorized for Bill Controller */
+                .antMatchers("/orderdetail/bill/**").hasAnyRole("ADMIN")
+                /*Authorize for Product Controller*/
+                .antMatchers("/product").hasAnyRole("ADMIN","USER")
+                .antMatchers("/postproduct").hasAnyRole("ADMIN","USER")
+                .antMatchers("/editproduct/**").hasAnyRole("ADMIN","USER")
+                .antMatchers("/updateproduct").hasAnyRole("ADMIN","USER")
+                .antMatchers("/deleteproduct/**").hasAnyRole("ADMIN","USER")
+                /*Authorized for Statistic Controller*/
+                .antMatchers("/statistic").hasAnyRole("ADMIN","USER")
+                .antMatchers("/statisticsale").hasAnyRole("ADMIN","USER")
+                .antMatchers("/statisticproduct").hasAnyRole("ADMIN","USER")
+                .antMatchers("/poststatisticproduct").hasAnyRole("ADMIN","USER")
+                /*Authorized for Teams Controller*/
+                .antMatchers("/teams").hasAnyRole("ADMIN")
+                .antMatchers("/team").hasAnyRole("ADMIN")
+                .antMatchers("/checkteam").hasAnyRole("ADMIN")
+                .antMatchers("/editteam/**").hasAnyRole("ADMIN")
+                .antMatchers("/updateteam").hasAnyRole("ADMIN")
+                .antMatchers("/deleteteam/**").hasAnyRole("ADMIN")
+                .antMatchers("/listactiveteam").hasAnyRole("ADMIN")
                 .anyRequest().permitAll()
                 .and().formLogin().permitAll();
     }
