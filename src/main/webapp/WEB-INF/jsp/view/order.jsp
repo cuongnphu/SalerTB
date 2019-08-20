@@ -24,7 +24,7 @@
 <h3>Tạo OrderBill: </h3>
 <form:form method="post" action="/postorder" modelAttribute="orderBill">
     <div class="table-responsive">
-        <table class="table table-bordered" style="width: 600px">
+        <table class="table table-bordered" style="width: 800px">
             <tr>
                 <form:input type="text" path="id" readonly="true" hidden="true"/>
             </tr>
@@ -45,7 +45,7 @@
 <h4 style="color: red"> Danh Sách :</h4>
 <div class="table-responsive">
     <div class="container-fluid">
-        <table class="table table-bordered" style="width: 600px">
+        <table class="table table-bordered" style="width: 800px">
             <thead>
             <tr>
                 <th></th>

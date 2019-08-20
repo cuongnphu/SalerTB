@@ -31,7 +31,7 @@
         </div>
         <br>
         <div class="container-fluid">
-            <table class="table table-bordered" style="width: 600px;">
+            <table class="table table-bordered" style="width: 800px;">
                 <thead class="thead">
                 <tr>
                     <th>Sắp Xếp Alphabet</th>
@@ -43,9 +43,28 @@
                     <td>
                         <form:select id="alphabetTeamId" path="teamId">
                             <option value="" disabled selected>ABC...</option>
-                            <option value="1">A</option>
-                            <option value="2">B</option>
-                            <option value="3">C</option>
+                            <form:option value="1">A</form:option>
+                            <form:option value="2">B</form:option>
+                            <form:option value="3">C</form:option>
+                            <form:option value="4">D</form:option>
+                            <form:option value="5">E</form:option>
+                            <form:option value="6">G</form:option>
+                            <form:option value="7">H</form:option>
+                            <form:option value="8">I</form:option>
+                            <form:option value="9">K</form:option>
+                            <form:option value="10">L</form:option>
+                            <form:option value="11">M</form:option>
+                            <form:option value="12">N</form:option>
+                            <form:option value="13">O</form:option>
+                            <form:option value="14">P</form:option>
+                            <form:option value="15">Q</form:option>
+                            <form:option value="16">R</form:option>
+                            <form:option value="17">S</form:option>
+                            <form:option value="18">T</form:option>
+                            <form:option value="19">U</form:option>
+                            <form:option value="20">V</form:option>
+                            <form:option value="21">X</form:option>
+                            <form:option value="22">Y</form:option>
                         </form:select>
                     </td>
                     <td>
@@ -74,7 +93,7 @@
 <h4 style="color: red"> Kết Quả Tra Cứu Nhập Hàng Kho :</h4>
 <div class="table-responsive">
     <div class="container-fluid">
-        <table class="table table-bordered" style="width: 600px">
+        <table class="table table-bordered" style="width: 800px">
             <thead>
             <tr>
                 <th></th>

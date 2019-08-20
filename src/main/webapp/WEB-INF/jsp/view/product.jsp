@@ -31,7 +31,7 @@
         </div>
         <br>
         <div class="container-fluid">
-            <table class="table table-bordered" style="width: 600px;">
+            <table class="table table-bordered" style="width: 800px;">
                 <thead class="thead">
                 <tr>
                     <th>Sắp Xếp Alphabet</th>
@@ -48,6 +48,25 @@
                             <option value="1">A</option>
                             <option value="2">B</option>
                             <option value="3">C</option>
+                            <option value="4">D</option>
+                            <option value="5">E</option>
+                            <option value="6">G</option>
+                            <option value="7">H</option>
+                            <option value="8">I</option>
+                            <option value="9">K</option>
+                            <option value="10">L</option>
+                            <option value="11">M</option>
+                            <option value="12">N</option>
+                            <option value="13">O</option>
+                            <option value="14">P</option>
+                            <option value="15">Q</option>
+                            <option value="16">R</option>
+                            <option value="17">S</option>
+                            <option value="18">T</option>
+                            <option value="19">U</option>
+                            <option value="20">V</option>
+                            <option value="21">X</option>
+                            <option value="22">Y</option>
                         </select>
                     </td>
                     <td>
@@ -79,8 +98,8 @@
 <h4 style="color: red"> Danh Sách Nhập Hàng Kho :</h4>
 <div class="table-responsive">
     <div class="container-fluid">
-        <table class="table table-bordered" style="width: 600px">
-            <thead>
+        <table class="table table-bordered" style="width: 800px">
+            <thead class="thead">
             <tr>
                 <th></th>
                 <th>Ngày (Date)</th>
@@ -102,8 +121,8 @@
                     <td>${prod.price}</td>
                     <td>${prod.total}</td>
                     <td>
-                        <p><a class="btn-info btn-sm" href="/editproduct/${prod.id}">&#9998</a></p>
-                        <p><a class="btn-info btn-sm" onclick="productScript.productConfirmDelete(${prod.id})">&#9940</a></p>
+                        <a class="btn-info btn-sm" href="/editproduct/${prod.id}">&#9998</a>
+                        <a class="btn-info btn-sm" onclick="productScript.productConfirmDelete(${prod.id})">&#9940</a>
                     </td>
                 </tr>
             </c:forEach>
