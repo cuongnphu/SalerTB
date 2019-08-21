@@ -53,11 +53,8 @@ public class BillServiceImpl implements BillService {
     public Bill getBillById(int id) {
         if(id > 0)
             return this.billDAO.getBillById(id);
-        else{
-            log.info("============== WARNING: Get Bill By Id not exist ================= ");
+        else
             return null;
-        }
-
     }
 
     @Override
